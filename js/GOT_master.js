@@ -25,9 +25,11 @@
 
 		[`ARRYN`, `House Arryn of the Eyrie is one of the Great Houses of Westeros. It has ruled over the Vale of Arryn for millennia, originally as the Kings of Mountain and Vale and more recently as Lords Paramount of the Vale and Wardens of the East under the Targaryen kings and Baratheon-Lannister kings. The nominal head of House Arryn is Robin Arryn, the Lord of the Eyrie, with his stepfather Petyr Baelish acting as Lord Protector until he reaches the age of majority.`], 
 
-		[`TARGERYEN`, `House Targaryen of Dragonstone is a Great House of Westeros and was the ruling royal House of the Seven Kingdoms for three centuries since it conquered and unified the realm, before it was deposed during Robert's Rebellion and House Baratheon replaced it as the new royal House. The few surviving Targaryens fled into exile to the Free Cities of Essos across the Narrow Sea. Currently based on Dragonstone off of the eastern coast of Westeros, House Targaryen seeks to retake the Seven Kingdoms from House Lannister, who formally replaced House Baratheon as the royal House following the destruction of the Great Sept of Baelor.`],
+		[`FREY`, `House Frey of the Twins was the Great House of the Riverlands, having gained their position for their treachery against their former liege lords, House Tully, who were stripped of all their lands and titles for their rebellion against the Iron Throne; House Tully had supported the independence movement for the Kingdom of the North. The current head of the house is unknown following the assassinations of Lord Walder Frey and two of his sons, Lothar Frey and Walder Rivers, by the vengeful Arya Stark. This is made more complex by the subsequent assassination of all the male Freys soon after.`],
 
-		[`FREY`, `House Frey of the Twins was the Great House of the Riverlands, having gained their position for their treachery against their former liege lords, House Tully, who were stripped of all their lands and titles for their rebellion against the Iron Throne; House Tully had supported the independence movement for the Kingdom of the North. The current head of the house is unknown following the assassinations of Lord Walder Frey and two of his sons, Lothar Frey and Walder Rivers, by the vengeful Arya Stark. This is made more complex by the subsequent assassination of all the male Freys soon after.`]
+		[`TYRELL`, `House Tyrell of Highgarden is an extinct Great House of Westeros. It ruled over the Reach, a vast, fertile, and heavily-populated region of southwestern Westeros, from their castle-seat of Highgarden as Lords Paramount of the Reach and Wardens of the South after taking control of the region from House Gardener during the Targaryen conquest.`],
+
+		[`TARGERYEN`, `House Targaryen of Dragonstone is a Great House of Westeros and was the ruling royal House of the Seven Kingdoms for three centuries since it conquered and unified the realm, before it was deposed during Robert's Rebellion and House Baratheon replaced it as the new royal House. The few surviving Targaryens fled into exile to the Free Cities of Essos across the Narrow Sea. Currently based on Dragonstone off of the eastern coast of Westeros, House Targaryen seeks to retake the Seven Kingdoms from House Lannister, who formally replaced House Baratheon as the royal House following the destruction of the Great Sept of Baelor.`]
 	];
 
 	function showLightbox() {
@@ -48,6 +50,7 @@
 		video.play();
 	}
 
+
 	function hideLightbox() {
 		lightbox.classList.remove('show-lightbox');
 		// rewind the video to the beginning
@@ -59,16 +62,18 @@
 	function animateBanner() {
 		const offSet = 600;
 
-		totalOffest = this.dataset.offset * offSet// + "px";
+		totalOffest = this.dataset.offset * offSet;// + "px";
 		
 
-		houseName.textContent = (`House ${houseData[0][0]}`);
+		houseName.textContent = `House ${houseData[this.dataset.offset][0]}`;
 
-		houseInfo.textContent = houseData [0][1];
+		houseInfo.textContent = houseData[this.dataset.offset][1];
 		//banners.style.right = totalOffest;
 		TweenMax.to(banners, 0.8, { right: totalOffest });
+		TweenMax.delayedCall(.9, showLightbox, null, this);
 	}
 
+	//shields.forEach(shield => shield.addEventListener('click', showLightbox));
 	shields.forEach(shield => shield.addEventListener('click', animateBanner));
 
 	video.addEventListener('ended', hideLightbox);
